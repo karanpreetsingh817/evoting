@@ -29,11 +29,10 @@ contract EvotinG{
         string PartyName;
         string PartyFlag;
         string CandidateName;
-        uint Candidate_num; //or candidate id or what ever you want call it my brother.....RITIK_LODDA
         uint Adhaarnumber;
         uint CountVote;
     }
-    candidate[] public candidates;
+    mapping(uint=>candidate) candidates;//where first int takes unique candidate number
 
 
 
@@ -65,14 +64,13 @@ contract EvotinG{
     }
 
 
-    function add_candidate(string memory panme,string memory pflag,string memory c_name,uint cnum,uint adhaar) isadmnistrator beforestart public{
+    function add_candidate(uint cn,string memory panme,string memory pflag,string memory c_name,uint adhaar) isadmnistrator beforestart public{
           
-          candidate.PartyName=panme;
-          candidate.PartyFlag=pflag;
-          candidate.CandidateName=c_name;
-          candidate.Candidate_num=cnum;
-          candidate.Adhaarnumber=adhaar;
-          candidate.CountVote=0;
+          candidates[cn].PartyName=panme;
+          candidates[cn].PartyFlag=pflag;
+          candidates[cn].CandidateName=c_name;
+          candidates[cn].Adhaarnumber=adhaar;
+          candidates[cn].CountVote=0;
 
     }
 
@@ -85,8 +83,10 @@ contract EvotinG{
 
 
     function makevote (uint candidatenum)public eligible_voter {
-        
+        require(status==Votestatus.Votestarted,"hi stop!! there is time to start a vote!!");
         candidates[candidatenum].CountVote=candidates[candidatenum].CountVote+1;
+        Voters[msg.sender].isVoted=true;
+        Voters[msg.sender].Votedto=candidatenum;
      }
 
 

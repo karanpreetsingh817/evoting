@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 contract EvotinG{
     address public administrator;
+    uint private after_deploy;                       // in bw after deploy and start_timming  administrator can update voters as well as candidates information
     uint private start_timming;                      //repesent timmimg when voting is started
     uint private end_timming;                        //repesent when voting is ended
     uint candidate_count;
@@ -13,7 +14,6 @@ contract EvotinG{
         string name;
         uint age;
         bool is_voted;
-        bool not_This;
         uint voted_to;
     }
     mapping(address=>voter) public voters;//baad me dekhenge ki private krna hai ja nahi....and haan validate ka bhi sochna hai bhai...
@@ -26,12 +26,15 @@ contract EvotinG{
         uint count_vote;
     }
     mapping(uint=>candidate) candidates;//where first int takes unique candidate number
-    uint[] private votes_of_candidate;
+    uint[] private votes_of_candidate;// array to stor total votes of each candidate
 
     //Constructor and modifier define here
     constructor(){
         administrator=msg.sender;
         status=vote_status.before_start;
+        after_deploy=block.timestamp;
+        start_timming=after_deploy+43200;  //means we have 12 hours to update data to our database of voters and candidate
+        end_timming=start_timming+604800;//means we have total 7 days after voting started to voting end{voting duration}
         }
 
     modifier is_admnistrator{
@@ -41,7 +44,7 @@ contract EvotinG{
 
     modifier before_start{
         require(status==vote_status.before_start,"bro i think voting is running, yeh kam to start se pehle krna tha na bhau");
-        require(block.timestamp<start_timming,"oh ho you are late!!!");
+        require(block.timestamp>after_deploy && block.timestamp<start_timming,"oh ho you are late!!!");
         _;
     }
 
@@ -65,25 +68,28 @@ contract EvotinG{
     function start_voting() public is_admnistrator before_start  //vote started
     {
         status=vote_status.vote_started;
-        start_timming=block.timestamp; //after deploy administator has 7 days of time to do any change
-        end_timming=start_timming+604800;
+       
     }
 
     function make_vote (uint candidate_num)public eligible_voter
     {
         require(status==vote_status.vote_started,"hi stop!! there is time to start a vote!!");
+        require(block.timestamp>start_timming && block.timestamp<end_timming);
         voters[msg.sender].is_voted=true;
         voters[msg.sender].voted_to=candidate_num;
         candidates[candidate_num].count_vote=candidates[candidate_num].count_vote+1;//increase vote count of that candidate 
+        votes_of_candidate[candidate_num]++;
     }
 
     function de_vote(uint candidate_num) public 
     {
          require(voters[msg.sender].is_voted==true,"this is only for thos who already voted");
          require(status==vote_status.vote_started,"hi stop!! there is time to start a vote!!");
+         require(block.timestamp>start_timming && block.timestamp<end_timming);
          voters[msg.sender].is_voted=false;
          voters[msg.sender].voted_to=0;
          candidates[candidate_num].count_vote=candidates[candidate_num].count_vote-1;//decrease vote count of that candidate
+          votes_of_candidate[candidate_num]--;
     }
 
     function vote_end() public is_admnistrator  //vote ended
@@ -104,9 +110,10 @@ contract EvotinG{
         require(status==vote_status.vote_end);
         uint winner=0;
         uint winner_candidate;
-        for(uint i=0;i<candidate_count;i++)
+        for(uint i=1;i<=candidate_count;i++)
         {
-            if(votes_of_candidate[i]>winner){
+            if(votes_of_candidate[i]>winner)
+            {
                 winner=votes_of_candidate[i];
                 winner_candidate=i;
             }
@@ -114,7 +121,4 @@ contract EvotinG{
         }
         return winner_candidate;
     }
-
-
-
 }

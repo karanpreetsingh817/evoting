@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 })
 
 app.post("/signInUsingMobileNumber", mobileValidator, (req, res) => {
-    //next page to implememnt
+
     const template = messageTemplate.getTemplate();
     template.error = false;
     template.status = 200;

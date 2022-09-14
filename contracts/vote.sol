@@ -17,7 +17,7 @@ contract EvotinG{
         bool is_voted;
     }
     mapping(address=>voter) public voters;//baad me dekhenge ki private krna hai ja nahi....and haan validate ka bhi sochna hai bhai...
-
+    mapping(uint=>bool) public voter_status;
     struct candidate{
         string party_name;
         string party_flag;
@@ -46,7 +46,6 @@ contract EvotinG{
         require( block.timestamp<start_timming,"oh ho you are late!!!");
         _;
     }
-
     modifier eligible_voter{
          address t=msg.sender;
          require(voters[t].is_voted ==false,"hi you are already give vote to this party");
@@ -54,12 +53,16 @@ contract EvotinG{
     }
 
     //All function define here
-
-    function addVoter(address v,string memory voter_name,uint age,uint adhaar_number ) is_admnistrator before_start public
+    function is_present(uint adhaar)  is_admnistrator before_start  view  public returns(bool){
+        return voter_status[adhaar];
+    }
+    function addVoter(address v,string memory voter_name,uint age,uint adhaar_number ) is_admnistrator before_start  public
     {
+    // require(voter_status[adhaar_number]==false,"voter already present in our server");
      voters[v].name=voter_name;
      voters[v].age=age;
      voters[v].adhaar_number=adhaar_number;
+     voter_status[adhaar_number]=true;
 
     }
     function add_candidate(uint cn,string memory pname,string memory pflag,string memory c_name,uint adhaar) is_admnistrator before_start public

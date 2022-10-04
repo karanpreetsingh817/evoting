@@ -34,18 +34,21 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form validate-form" action="/signInUsingMobileNumber" method="post">
+                <form class="login100-form validate-form" action="/signIn" method="post">
                     <span class="login100-form-title p-b-26">
 						Welcome To E-Voting DAPP
 					</span>
                     <span class="login100-form-title p-b-48">
 
 					</span>
-
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        <input class="input100" type="text" name="mobileNumber" required="required" pattern="[6789][0-9]{9}">
-                        <span class="focus-input100" data-placeholder="+91 Mobile Number(10 digit)"></span>
-                    </div>
+                    <label class="wrap-input100 validate-input has-val">
+                        <input class="input100" id="inputadhar" type="text" name="adharNumber" required="required" pattern="[0-9]{12}">
+                        <span class="focus-input100" id="placeholderadhar" data-placeholder="Adhar Number(12 digit)"></span>
+                    </label>
+                    <label class="wrap-input100 validate-input " data-validate="Valid email is: a@b.c">
+                        <input class="input100" id="inputmobile" type="text" name="mobileNumber" required="required" pattern="[6789][0-9]{9}">
+                        <span class="focus-input100" id="placeholdermobile" data-placeholder="+91 Mobile Number(10 digit)"></span>
+                    </label>
 
 
 

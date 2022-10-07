@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
     return res.status(200).render('Loginpage.ejs')
 })
 
-app.post("/signInUsingMobileNumber", mobileValidator, (req, res) => {
-
+app.post("/signIn", mobileValidator, (req, res) => {
+    console.log(req.body)
     const template = messageTemplate.getTemplate();
     template.error = false;
     template.status = 200;

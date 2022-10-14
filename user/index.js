@@ -1,6 +1,7 @@
 const express = require("express")
 const path = require("path")
 const app = express()
+const cookieParser = require('cookie-parser')
 require("dotenv").config()
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "client"))
@@ -12,14 +13,18 @@ app.use(express.urlencoded({
     limit: "50mb",
     parameterLimit: "50000"
 }));
+app.use(cookieParser())
 const messageTemplate = require("./util/messageTemplate")
-const mobileValidator = require("./middlewares/mobileValidator.js")
+const validator = require("./middlewares/auth.js")
 const port = process.env.port || 2500;
-app.get("/", (req, res) => {
-    return res.status(200).render('Loginpage.ejs')
+app.get("/", validator.sessionChecker, async(req, res) => {
+    return res.status(200).send("Main Page of voting...")
 })
 
-app.post("/signIn", mobileValidator, (req, res) => {
+app.get("/signIn", validator.isSignedOut, async(req, res) => {
+    return res.status(200).render('Loginpage.ejs')
+})
+app.post("/signIn", validator.validateAadhaarNumber, validator.validateMobileNumber, async(req, res) => {
     console.log(req.body)
     const template = messageTemplate.getTemplate();
     template.error = false;

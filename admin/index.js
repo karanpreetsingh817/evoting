@@ -3,7 +3,7 @@ const path = require("path")
 const app = express()
 require("dotenv").config()
 const cookieParser = require("cookie-parser")
-const middleware = require("./middlewares/signInSessionChecker.js")
+const { isSignedOut, signIn, sessionChecker, signOut } = require("./middlewares/auth.js")
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "view"))
 app.use(express.static(path.join(__dirname, "./view")));
@@ -16,15 +16,18 @@ app.use(express.urlencoded({
     parameterLimit: "50000"
 }));
 const port = process.env.port || 1500;
-app.get("/", middleware, (req, res) => {
+app.get("/", sessionChecker, (req, res) => {
+    return res.status(200).render('main')
+})
+app.get("/adminsignin", isSignedOut, (req, res) => {
     return res.status(200).render('adminlogin')
 })
-app.post("/adminsignin", require('./middlewares/signInChecker'), async(req, res) => {
-    const template = require('./util/messageTemplate').getTemplate()
-    template.message = 'Admin sign in successfully'
-    template.status = 200
-    return res.status(200).send(template)
+app.post("/adminsignin", signIn, async(req, res) => {
+    res.status(200).redirect("/")
+})
+app.get("/adminsignout", signOut, (req, res) => {
 
+    res.status(302).redirect("/adminsignin")
 })
 
 app.listen(port, (err) => {

@@ -26,7 +26,6 @@ app.post("/adminsignin", signIn, async(req, res) => {
     res.status(200).redirect("/")
 })
 app.get("/adminsignout", signOut, (req, res) => {
-
     res.status(302).redirect("/adminsignin")
 })
 

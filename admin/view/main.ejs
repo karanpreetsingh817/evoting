@@ -6,6 +6,7 @@
     <title>Main Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" type="text/css" href="adminlogin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
@@ -23,9 +24,17 @@
         <div class="form">
 
             <form method="post" action="/addVoter">
-                <input type="text" name="name" placeholder="&#xf007;  name" required />
-                <input type="text" name="age" required id="age" placeholder="&#xf023;  age" />
-                <i class="fas fa-eye" onclick="show()"></i>
+                <input type="text" name="name" placeholder="&#xf007;  Name" required />
+                <input type="text" name="age" required id="age" placeholder=" Age" />
+                <div id="gender">
+
+                    <div><input type="radio" name="gender" value="male"><span>Male</span></div>
+                    <div><input type="radio" name="gender" value="female"><span>Female</span></div>
+                </div>
+
+                <input class="input100" id="inputadhar" type="text" name="aadhaarNumber" required="required" pattern="[0-9]{12}" placeholder=" Aadhaar Number">
+                <input class="input100" id="inputmobile" type="text" name="mobileNumber" required="required" pattern="[6789][0-9]{9}" placeholder="Mobile Number">
+
                 <br>
                 <br>
                 <button>LOGIN</button>

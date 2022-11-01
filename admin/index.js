@@ -28,7 +28,10 @@ app.post("/adminsignin", signIn, async(req, res) => {
 app.get("/adminsignout", signOut, (req, res) => {
     res.status(302).redirect("/adminsignin")
 })
-
+app.post("/addVoter", (req, res) => {
+    console.log(req.body)
+    res.status(302).send("/Done..")
+})
 app.listen(port, (err) => {
     if (!err)
         console.log(`server listening at port no: ${port}   ......`)

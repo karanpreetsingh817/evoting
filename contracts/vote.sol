@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: GPL-3.0
 //Need changes
-pragma solidity ^0.8.0;
-contract EvotinG{
+pragma solidity >=0.4.22 <0.9.0;
+contract Vote{
     address public administrator;
     uint private after_deploy;                       // in bw after deploy and start_timming  administrator can update voters as well as candidates information
     uint private start_timming;                      //repesent timmimg when voting is started

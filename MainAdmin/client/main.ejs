@@ -18,68 +18,68 @@
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4" style="text-align: center;">E Voting Main Admin
             </p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="nav-link">Start Voting</button>
-                <button type="button" class="nav-link">End Voting</button>
-                <button style="color: #385277;" class="nav-link" data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">Create Pool Admin</button>
+            <p class="lead mb-4" style="text-align: center;" id="admin-address">
+            </p>
+        </div>
+    </div>
 
+
+    <div class="tab-wrapper" style="margin: auto;width:95vw">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pooladmin-tab" data-bs-toggle="tab" data-bs-target="#pooladmin" type="button" role="tab" aria-controls="pooladmin" aria-selected="true">Pool Admin</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="candidate-tab" data-bs-toggle="tab" data-bs-target="#candidate" type="button" role="tab" aria-controls="candidate" aria-selected="false">Candidate</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent" style="display: flex;justify-content: center;align-items: center;flex-direction: column;padding-top: 40px;">
+            <div class="tab-pane fade show active" id="pooladmin" role="tabpanel" aria-labelledby="pooladmin-tab">
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Name</span>
+                    <input type="text" id="pooladmin-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">User Name</span>
+                    <input type="text" id="pooladmin-username" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Booth Number</span>
+                    <input type="number" id="pooladmin-booth" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Blockchain Address</span>
+                    <input type="text" id="pooladmin-blockchainaddress" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <button id="pooladmin-submit">Submit</button>
+            </div>
+            <div class="tab-pane fade" id="candidate" role="tabpanel" aria-labelledby="candidate-tab" style="display: flex;justify-content: center;align-items: center;flex-direction: column;padding-top: 40px;">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Candidate Name</span>
+                    <input type="text" id="candidate-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Candidate Aadhaar</span>
+                    <input type="text" id="candidate-aadhaar" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Party Name</span>
+                    <input type="text" id="candidate-party" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Party Flag</span>
+                    <input type="text" id="candidate-flag" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <button id="candidate-submit">Submit</button>
             </div>
         </div>
     </div>
 
 
-
-    <div class="modal fade" id="staticBackdrop" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add Pool Admin</h5>
-                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div id="errorMessage" style="text-align: center; color: Red;"></div>
-                <main class="container">
-                    <form class="row g-3 needs-validation" novalidate>
-                        <div class="col-md-4">
-                            <label for="fundName" class="form-label">Fund Name</label>
-                            <input type="text" class="form-control" id="fundName" value="" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="minAmount" class="form-label">Min Amount(eth)</label>
-                            <input type="number" step="0.000000000000000001" class="form-control" id="minAmount" value="" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fundDesc" class="form-label">Fund Description</label>
-                            <textarea class="form-control is-invalid" id="fundDesc" placeholder="For which community" required></textarea>
-
-                        </div>
-
-                        <div class="col-12">
-                            <button class="btn btn-primary mb-3" style="overflow: hidden;
-            width: 130px;
-            height: 40px;">Create Fund</button>
-                        </div>
-                    </form>
-                </main>
-
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="abi.js"></script>
+    <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

@@ -26,12 +26,17 @@
 
     <div class="tab-wrapper" style="margin: auto;width:95vw">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
+
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pooladmin-tab" data-bs-toggle="tab" data-bs-target="#pooladmin" type="button" role="tab" aria-controls="pooladmin" aria-selected="true">Pool Admin</button>
+                <button class="nav-link active" id="pooladmin-tab" data-bs-toggle="tab" data-bs-target="#pooladmin" type="button" role="tab" aria-controls="pooladmin" aria-selected="false">Add Pool Admin</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="candidate-tab" data-bs-toggle="tab" data-bs-target="#candidate" type="button" role="tab" aria-controls="candidate" aria-selected="false">Candidate</button>
+                <button class="nav-link" id="candidate-tab" data-bs-toggle="tab" data-bs-target="#candidate" type="button" role="tab" aria-controls="candidate" aria-selected="false">Add Candidate</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="candidateview-tab" data-mdb-toggle="tooltip" data-mdb-placement="top" data-bs-toggle="tab" data-bs-target="#candidateview" type="button" role="tab" aria-controls="candidateview" aria-selected="true">Candidates</button>
+            </li>
+
         </ul>
         <div class="tab-content" id="myTabContent" style="display: flex;justify-content: center;align-items: center;flex-direction: column;padding-top: 40px;">
             <div class="tab-pane fade show active" id="pooladmin" role="tabpanel" aria-labelledby="pooladmin-tab">
@@ -54,7 +59,9 @@
                 </div>
                 <button id="pooladmin-submit">Submit</button>
             </div>
-            <div class="tab-pane fade" id="candidate" role="tabpanel" aria-labelledby="candidate-tab" style="display: flex;justify-content: center;align-items: center;flex-direction: column;padding-top: 40px;">
+
+
+            <div class="tab-pane fade" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Candidate Name</span>
                     <input type="text" id="candidate-name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
@@ -72,6 +79,15 @@
                     <input type="text" id="candidate-flag" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                 </div>
                 <button id="candidate-submit">Submit</button>
+            </div>
+
+
+            <div class="tab-pane fade" id="candidateview" role="tabpanel" aria-labelledby="candidateview-tab">
+                <b>Candidates Count</b>
+                <strong id="candidatesCount"></strong>
+
+
+
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-const contractAddress = `0xa598616b23050020463c0B45ACccaee363fD0693`
+const contractAddress = `0x797BDdcb0DA7e8222D53A163184Ad8C7957769a2`
 const contractAbi = `[
     {
       "inputs": [],
@@ -162,6 +162,11 @@ const contractAbi = `[
         {
           "internalType": "bool",
           "name": "is_voted",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "isPresent",
           "type": "bool"
         }
       ],
@@ -342,6 +347,16 @@ const contractAbi = `[
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
         }
       ],
       "stateMutability": "view",

@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: GPL-3.0
-//0xa598616b23050020463c0B45ACccaee363fD0693
+//
 pragma solidity >=0.4.22 <0.9.0;
 contract Vote{
     address public administrator;
@@ -16,6 +16,7 @@ contract Vote{
         uint age;
         uint voted_to;
         bool is_voted;
+        bool isPresent;
     }
     mapping(address=>voter) public voters;//baad me dekhenge ki private krna hai ja nahi....and haan validate ka bhi sochna hai bhai...
     mapping(uint=>bool) public voter_status;
@@ -52,6 +53,7 @@ contract Vote{
     }
     modifier eligible_voter{
          address t=msg.sender;
+         require(voters[t].isPresent==true,"You are Not registered for Voting");
          require(voters[t].is_voted ==false,"hi you are already give vote to this party");
         _;
     }
@@ -67,6 +69,7 @@ contract Vote{
      voters[v].age=age;
      voters[v].adhaar_number=adhaar_number;
      voters[v].voted_to=1000;
+     voters[v].isPresent=true;
      voter_status[adhaar_number]=true;
 
     }
@@ -117,7 +120,7 @@ contract Vote{
 
     function vote_end() public is_admnistrator  //vote ended
     {
-        require(status==vote_status.vote_started && end_timming<=block.timestamp);
+        require(status==vote_status.vote_started);// && end_timming<=block.timestamp);
         status=vote_status.vote_end; //change status to vote_end
         vote_status_int=2;
     }
@@ -129,11 +132,11 @@ contract Vote{
 
     }
 
-    function show_winner() public view is_admnistrator returns(uint)
+    function show_winner() public view is_admnistrator returns(uint,uint,string memory)
     {
         require(status==vote_status.vote_end);
         uint winner=votes_of_candidate[0];
-        uint winner_candidate=1;
+        uint winner_candidate=0;
         for(uint i=2;i<=candidate_count;i++)
         {
             if(votes_of_candidate[i-1]>winner)
@@ -143,6 +146,16 @@ contract Vote{
             }
 
         }
-        return winner_candidate;
+        uint winner_ct=0;
+        for(uint i=0;i<candidate_count;i++)
+        {
+            if(winner==votes_of_candidate[i])
+            winner_ct=winner_ct+1;
+
+        }
+        string memory tmp="success";
+        if(winner_ct>1)
+        tmp="winner not decided yet there is tie";
+        return (winner_candidate,winner_ct,tmp);
     }
 }

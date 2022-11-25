@@ -23,7 +23,7 @@
     <div class="login-page">
         <div class="form">
 
-            <form method="post" action="/addVoter">
+            <form id="form">
                 <input type="text" name="name" placeholder="&#xf007;  Name" required />
                 <input type="text" name="age" required id="age" placeholder=" Age" />
                 <div id="gender">
@@ -32,30 +32,21 @@
                     <div><input type="radio" name="gender" value="female"><span>Female</span></div>
                 </div>
 
-                <input class="input100" id="inputadhar" type="text" name="aadhaarNumber" required="required" pattern="[0-9]{12}" placeholder=" Aadhaar Number">
-                <input class="input100" id="inputmobile" type="text" name="mobileNumber" required="required" pattern="[6789][0-9]{9}" placeholder="Mobile Number">
-
+                <input class="input100" id="inputadhar" type="text" name="aadhaarnumber" required="required" pattern="[0-9]{12}" placeholder=" Aadhaar Number">
+                <input class="input100" id="inputmobile" type="text" name="mobilenumber" required="required" pattern="[6789][0-9]{9}" placeholder="Mobile Number">
+                <input type="text" name="blockchainaccount" id="blockchainaddress" required="required" placeholder="Blockchain address">
                 <br>
                 <br>
-                <button>LOGIN</button>
+                <button>Add</button>
                 <p class="message"></p>
             </form>
         </div>
     </div>
 
-    <script>
-        function show() {
-            var password = document.getElementById("password");
-            var icon = document.querySelector(".fas")
-
-            // ========== Checking type of password ===========
-            if (password.type === "password") {
-                password.type = "text";
-            } else {
-                password.type = "password";
-            }
-        };
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">
     </script>
+    <script src="abi.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

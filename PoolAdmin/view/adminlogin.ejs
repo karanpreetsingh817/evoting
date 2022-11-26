@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Admin Login</title>
+    <title>Pool Admin Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="adminlogin.css">
@@ -34,20 +34,10 @@
             </form>
         </div>
     </div>
-
-    <script>
-        function show() {
-            var password = document.getElementById("password");
-            var icon = document.querySelector(".fas")
-
-            // ========== Checking type of password ===========
-            if (password.type === "password") {
-                password.type = "text";
-            } else {
-                password.type = "password";
-            }
-        };
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script defer src="abi.js">
     </script>
+    <script defer src="adminlogin.js"></script>
 </body>
 
 </html>

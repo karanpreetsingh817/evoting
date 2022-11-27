@@ -34,7 +34,7 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form validate-form" action="/signIn" method="post">
+                <form class="login100-form validate-form" id="form">
                     <span class="login100-form-title p-b-26">
 						Welcome To E-Voting DAPP
 					</span>
@@ -49,13 +49,16 @@
                         <input class="input100" id="inputmobile" type="text" name="mobileNumber" required="required" pattern="[6789][0-9]{9}">
                         <span class="focus-input100" id="placeholdermobile" data-placeholder="+91 Mobile Number(10 digit)"></span>
                     </label>
-
+                    <label id='otp' class="wrap-input100 validate-input " data-validate="Valid email is: a@b.c">
+                        <input class="input100" id="otp" type="text" name="otp"  >
+                        <span class="focus-input100" id="placeholdermobile" data-placeholder="OTP"></span>
+                    </label>
 
 
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">
+                            <button id="button" class="login100-form-btn">
 								Login
 							</button>
                         </div>
@@ -69,7 +72,9 @@
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script defer src="abi.js">
+    </script>
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
@@ -85,7 +90,7 @@
     <!--===============================================================================================-->
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
-    <script src="js/LoginPage.js"></script>
+    <script src="./LoginPage.js"></script>
 
 </body>
 

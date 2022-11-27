@@ -5,21 +5,42 @@ window.onload = async() => {
     ins = getContractInstance(contractAbi, contractAddress)
     const voteStatus = await ins.methods.vote_status_int().call({ form: accounts[0] })
     if (voteStatus == 2) {
-        blockDisplay("Voting has been ended you can't Vote Now")
-    }
-    const user = await ins.methods.voters(accounts[0]).call({ from: accounts[0] })
-    if (user.isPresent == false) {
-        blockDisplay("You are Not registered User with this account")
-    }
-    document.getElementById("name").innerHTML = `<b>${user.name}</b> Voting Area`
-    document.getElementById("aadhaarNumber").innerText = `Aaadhaar :${user.adhaar_number}`
-    document.getElementById('blockchainaddress').innerText = accounts[0]
-    const candidatesCount = await ins.methods.candidate_count().call({ from: accounts[0] })
-    for (let i = 0; i < candidatesCount; i++) {
-        if (i == user.voted_to) {
-            const candidateData = await ins.methods.candidates(i).call({ from: accounts[0] })
+        document.getElementById('winner').style.display = "block"
+        const winner = await ins.methods.show_winner().call({ from: accounts[0] })
+        console.log(winner)
+        if (winner[1] == 1) {
+            const candidateData = await ins.methods.candidates(winner[1]).call({ from: accounts[0] })
             const div = document.createElement('div')
             div.innerHTML = ` <div class="card bg-success" style="width: 18rem; margin-bottom: 15px;">
+            <div class="card-body">
+                <h5 class="card-title">Candidate Party : ${candidateData.party_name}</h5>
+            </div>
+            <ul class="list-group list-group-light list-group-small">
+                <li class="list-group-item px-4">Candidate Party Flag: ${candidateData.party_flag}</li>
+                <li class="list-group-item px-4">Candidate Name: ${candidateData.candidate_name}</li>
+            </ul>
+        </div>`
+            document.getElementById('section').appendChild(div)
+        } else {
+            const div = document.createElement('div')
+            div.innerHTML = `Winner not decided yet`
+            document.getElementById('section').appendChild(div)
+        }
+
+    } else {
+        const user = await ins.methods.voters(accounts[0]).call({ from: accounts[0] })
+        if (user.isPresent == false) {
+            blockDisplay("You are Not registered User with this account")
+        }
+        document.getElementById("name").innerHTML = `<b>${user.name}</b> Voting Area`
+        document.getElementById("aadhaarNumber").innerText = `Aaadhaar :${user.adhaar_number}`
+        document.getElementById('blockchainaddress').innerText = accounts[0]
+        const candidatesCount = await ins.methods.candidate_count().call({ from: accounts[0] })
+        for (let i = 0; i < candidatesCount; i++) {
+            if (i == user.voted_to) {
+                const candidateData = await ins.methods.candidates(i).call({ from: accounts[0] })
+                const div = document.createElement('div')
+                div.innerHTML = ` <div class="card bg-success" style="width: 18rem; margin-bottom: 15px;">
             <div class="card-body">
                 <h5 class="card-title">Candidate Party : ${candidateData.party_name}</h5>
             </div>
@@ -32,11 +53,11 @@ window.onload = async() => {
             <button type="button" data-type="devote" data-id="${i}" class="btn-block btn-dark">De Vote</button>
 
         </div>`
-            document.getElementById('section').appendChild(div)
-        } else {
-            const candidateData = await ins.methods.candidates(i).call({ from: accounts[0] })
-            const div = document.createElement('div')
-            div.innerHTML = ` <div class="card" style="width: 18rem; margin-bottom: 15px;">
+                document.getElementById('section').appendChild(div)
+            } else {
+                const candidateData = await ins.methods.candidates(i).call({ from: accounts[0] })
+                const div = document.createElement('div')
+                div.innerHTML = ` <div class="card" style="width: 18rem; margin-bottom: 15px;">
             <div class="card-body">
                 <h5 class="card-title">Candidate Party : ${candidateData.party_name}</h5>
             </div>
@@ -49,7 +70,8 @@ window.onload = async() => {
             <button type="button" data-type="devote" data-id="${i}" style="pointer-events: none" class="btn-block ">De Vote</button>
 
         </div>`
-            document.getElementById('section').appendChild(div)
+                document.getElementById('section').appendChild(div)
+            }
         }
     }
 

@@ -5,11 +5,39 @@ window.onload = async() => {
     await connect3()
     ins = getContractInstance(contractAbi, contractAddress)
     const st = await ins.methods.vote_status_int().call({ from: accounts[0] })
+    if (st == 0) {
+        document.getElementById('votingStart').style.display = 'block'
+    } else if (st == 1) { document.getElementById('votingEnd').style.display = 'block' }
+
     console.log(voteStatus[st])
 
     await fetchAndDisplayCandidates()
 
 }
+document.getElementById('votingStart').addEventListener('click', async() => {
+    try {
+        ins = getContractInstance(contractAbi, contractAddress)
+        const res = await ins.methods.start_voting().send({ from: accounts[0] })
+        window.location.href = '/'
+    } catch (error) {
+        alert(error)
+    }
+
+
+})
+document.getElementById('votingEnd').addEventListener('click', async() => {
+    try {
+        ins = getContractInstance(contractAbi, contractAddress)
+        const res = await ins.methods.vote_end().send({ from: accounts[0] })
+        window.location.href = '/'
+    } catch (error) {
+        alert(error)
+    }
+
+
+})
+
+
 async function fetchAndDisplayCandidates() {
     const count = await ins.methods.candidate_count().call({ from: accounts[0] })
     document.getElementById('candidatesCount').innerText = count

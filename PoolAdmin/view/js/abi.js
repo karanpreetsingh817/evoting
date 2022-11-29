@@ -1,4 +1,4 @@
-const contractAddress = `0x797BDdcb0DA7e8222D53A163184Ad8C7957769a2`
+const contractAddress = `0xAc8f998Fc03a53c0aEBF6937e32a5FFEc255832B`
 const contractAbi = `[
     {
       "inputs": [],
@@ -16,7 +16,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -29,7 +30,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -63,7 +65,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -82,7 +85,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -95,7 +99,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -108,7 +113,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -127,7 +133,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -171,7 +178,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -190,7 +198,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -209,7 +218,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -337,7 +347,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -360,7 +371,8 @@ const contractAbi = `[
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ]`
 const web_3 = new Web3("HTTP://127.0.0.1:7000")

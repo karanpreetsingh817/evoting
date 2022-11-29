@@ -17,8 +17,8 @@ app.use(cookieParser())
 const messageTemplate = require("./util/messageTemplate")
 const validator = require("./middlewares/auth.js")
 const port = process.env.port || 2500;
-app.get("/", validator.sessionChecker, async(req, res) => {
-    return res.status(200).send("Main Page of voting...")
+app.get("/" /*, validator.mainPageSessionChecker*/ , async(req, res) => {
+    return res.status(200).render('VotingArea.ejs')
 })
 
 app.get("/signIn", validator.isSignedOut, async(req, res) => {
@@ -29,10 +29,17 @@ app.post("/signIn", validator.validateAadhaarNumber, validator.validateMobileNum
     const template = messageTemplate.getTemplate();
     template.error = false;
     template.status = 200;
-    template.message = 'Sign in sucessfull'
+    template.message = 'OTP SENT '
         //Have to first create dummy database for user details which will be added at admin port
         //If registered mob.no exist the verify using otp through  //https://instantalerts.co/api/web/send?apikey=xxxx&sender=&to=91xxxxxxxxxx&message=Otp
     return res.status(200).json(template)
+})
+app.post("/signInOtp", validator.sessionChecker, async(req, res) => {
+    const template = messageTemplate.getTemplate();
+    template.error = false;
+    template.status = 200;
+    template.message = 'Sign IN SUCESS '
+    res.status(200).send(template)
 })
 app.listen(port, (err) => {
     if (!err)

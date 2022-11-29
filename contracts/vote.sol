@@ -132,7 +132,7 @@ contract Vote{
 
     }
 
-    function show_winner() public view is_admnistrator returns(uint,uint,string memory)
+    function show_winner() public view  returns(uint,uint,string memory)
     {
         require(status==vote_status.vote_end);
         uint winner=votes_of_candidate[0];
